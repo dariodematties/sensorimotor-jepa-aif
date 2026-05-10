@@ -6,6 +6,7 @@ The current first milestone is deliberately narrow:
 
 - implement a movable glimpse environment
 - visualize fixation trajectories and observations
+- collect rollouts and transition data for the first predictor experiments
 - leave model and loss code as placeholders until the sensorimotor loop is stable
 
 ## Environment
@@ -61,6 +62,19 @@ python scripts/test_env.py --download
 ```
 
 This writes a rollout visualization to `artifacts/mnist_glimpse_rollout.png`.
+
+## Rollout Logging
+
+You can also collect training-style transition data:
+
+```bash
+python scripts/collect_rollouts.py --synthetic --episodes 8
+```
+
+That command writes:
+
+- a rollout log with actions, fixations, and glimpses to `artifacts/rollouts/rollouts.json`
+- a transition dataset with `(observation, action, next_observation, fixation, next_fixation)` arrays to `artifacts/rollouts/transitions.npz`
 
 ## Repository Layout
 
