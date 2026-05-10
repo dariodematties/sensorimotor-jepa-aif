@@ -76,6 +76,22 @@ That command writes:
 - a rollout log with actions, fixations, and glimpses to `artifacts/rollouts/rollouts.json`
 - a transition dataset with `(observation, action, next_observation, fixation, next_fixation)` arrays to `artifacts/rollouts/transitions.npz`
 
+## First Training Baseline
+
+The first learner keeps the architecture intentionally small:
+
+- one encoder `q_phi(s_t | o_t)` mapping each `7x7` glimpse to a latent vector
+- one action-conditioned predictor `p_theta(s_{t+1} | s_t, a_t)`
+- one deterministic latent prediction loss as a first proxy for the later KL objective
+
+Run a synthetic smoke test with:
+
+```bash
+python scripts/train_predictor.py --synthetic --episodes 32 --steps 8 --epochs 5 --seed 0
+```
+
+This writes a checkpoint to `artifacts/checkpoints/first_baseline.pt`.
+
 ## Repository Layout
 
 ```text
@@ -83,7 +99,9 @@ sensorimotor-jepa-aif/
 ├── README.md
 ├── requirements.txt
 ├── scripts/
-│   └── test_env.py
+│   ├── collect_rollouts.py
+│   ├── test_env.py
+│   └── train_predictor.py
 └── src/
     └── sm_jepa_aif/
         ├── envs/

@@ -2,8 +2,11 @@
 
 from .data import RolloutEpisode, RolloutLogger, RolloutStep, TransitionDataset, TransitionSample
 from .envs import MNISTGlimpseEnv, StepResult
+from .models import ActionConditionedPredictor, GlimpseEncoder
 
 __all__ = [
+    "ActionConditionedPredictor",
+    "GlimpseEncoder",
     "MNISTGlimpseEnv",
     "RolloutEpisode",
     "RolloutLogger",

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -30,6 +31,15 @@ class TransitionDataset(Dataset[dict[str, torch.Tensor]]):
 
     def __init__(self, transitions: dict[str, np.ndarray]) -> None:
         self.transitions = transitions
+
+    @classmethod
+    def from_npz(cls, path: str | Path) -> "TransitionDataset":
+        archive = np.load(Path(path))
+        transitions = {
+            key: archive[key]
+            for key in archive.files
+        }
+        return cls(transitions=transitions)
 
     @classmethod
     def from_rollout_logger(cls, logger: RolloutLogger) -> "TransitionDataset":
@@ -79,6 +89,11 @@ class TransitionDataset(Dataset[dict[str, torch.Tensor]]):
 
     def as_arrays(self) -> dict[str, np.ndarray]:
         return {key: value.copy() for key, value in self.transitions.items()}
+
+    def save_npz(self, path: str | Path) -> None:
+        destination = Path(path)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(destination, **self.as_arrays())
 
     def action_histogram(self) -> dict[int, int]:
         if len(self) == 0:
