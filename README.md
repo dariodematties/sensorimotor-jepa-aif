@@ -28,16 +28,30 @@ The environment supports two data sources:
 
 ## Quick Start
 
-Install dependencies in your virtual environment, then run:
+Create and populate a virtual environment:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/test_env.py --synthetic
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
-If you already have MNIST cached locally, or want to download it:
+Then run the synthetic offline smoke test:
 
 ```bash
-PYTHONPATH=src .venv/bin/python scripts/test_env.py --download
+python scripts/test_env.py --synthetic
+```
+
+If you prefer not to activate the venv, use:
+
+```bash
+.venv/bin/python scripts/test_env.py --synthetic
+```
+
+If you already have MNIST cached locally, or want to download it, run:
+
+```bash
+python scripts/test_env.py --download
 ```
 
 This writes a rollout visualization to `artifacts/mnist_glimpse_rollout.png`.
