@@ -42,6 +42,12 @@ Then run the synthetic offline smoke test:
 python scripts/test_env.py --synthetic
 ```
 
+That command is now random by default. If you want a reproducible rollout, pass an explicit seed, for example:
+
+```bash
+python scripts/test_env.py --synthetic --seed 0
+```
+
 If you prefer not to activate the venv, use:
 
 ```bash

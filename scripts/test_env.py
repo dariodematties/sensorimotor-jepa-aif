@@ -23,13 +23,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--steps", type=int, default=12, help="number of actions to execute")
     parser.add_argument("--glimpse-size", type=int, default=7, help="odd crop size")
     parser.add_argument("--index", type=int, default=None, help="dataset index to visualize")
-    parser.add_argument("--seed", type=int, default=0, help="random seed")
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="random seed; omit for a different rollout each run",
+    )
     parser.add_argument("--data-root", type=Path, default=Path("data"), help="dataset directory")
     parser.add_argument("--download", action="store_true", help="download MNIST if not present")
     parser.add_argument(
         "--start-strategy",
         choices=("center", "random"),
-        default="center",
+        default="random",
         help="initial fixation placement",
     )
     parser.add_argument(
