@@ -92,6 +92,22 @@ python scripts/train_predictor.py --synthetic --episodes 32 --steps 8 --epochs 5
 
 This writes a checkpoint to `artifacts/checkpoints/first_baseline.pt`.
 
+## Latent Diagnostics
+
+Before adding an epistemic policy, you can inspect the learned representation directly:
+
+- latent variance across dimensions
+- action sensitivity of the predictor
+- a small frozen linear probe for digit identity
+
+Run:
+
+```bash
+python scripts/evaluate_latents.py --synthetic --episodes 64 --steps 8 --seed 0
+```
+
+This writes a report to `artifacts/analysis/latent_diagnostics.json`.
+
 ## Repository Layout
 
 ```text
@@ -100,6 +116,7 @@ sensorimotor-jepa-aif/
 ├── requirements.txt
 ├── scripts/
 │   ├── collect_rollouts.py
+│   ├── evaluate_latents.py
 │   ├── test_env.py
 │   └── train_predictor.py
 └── src/
