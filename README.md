@@ -108,6 +108,14 @@ python scripts/evaluate_latents.py --synthetic --episodes 64 --steps 8 --seed 0
 
 This writes a report to `artifacts/analysis/latent_diagnostics.json`.
 
+To turn that report into a quick figure:
+
+```bash
+python scripts/plot_latent_diagnostics.py
+```
+
+This writes `artifacts/analysis/latent_diagnostics.png`.
+
 ## Repository Layout
 
 ```text
@@ -117,6 +125,7 @@ sensorimotor-jepa-aif/
 ├── scripts/
 │   ├── collect_rollouts.py
 │   ├── evaluate_latents.py
+│   ├── plot_latent_diagnostics.py
 │   ├── test_env.py
 │   └── train_predictor.py
 └── src/
